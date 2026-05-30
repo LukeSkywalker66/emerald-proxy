@@ -1,1 +1,5 @@
+# Backups de base de datos todos los dias a las 03:00 AM
 0 3 * * * /opt/emerald-proxy/backups/backup.sh >> /var/log/emerald_backup.log 2>&1
+
+# Limpieza profunda de Docker todos los domingos a las 04:00 AM
+0 4 * * 0 /usr/bin/docker system prune -af --volumes > /dev/null 2>&10 3 * * * /opt/emerald-proxy/backups/backup.sh >> /var/log/emerald_backup.log 2>&1
