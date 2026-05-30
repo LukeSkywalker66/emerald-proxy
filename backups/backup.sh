@@ -36,11 +36,29 @@ else
     exit 1
 fi
 
-# 5. Limpieza y Retención Local (Borra backups locales más viejos que X días)
+# === REPLICACIÓN EN RED LOCAL (LAN) ===
+# El script verifica si la función está activada en el .env
+if [ "$LAN_BACKUP_ENABLED" = "true" ]; then
+    echo "[$(date)] 🖧 Replicación local activada. Enviando a la LAN..."
+    
+    # Ejecutamos el envío seguro por SSH/SCP usando las variables
+    /usr/bin/scp -i /home/lucas-dev/.ssh/id_ed25519 $LOCAL_PATH ${LAN_SERVER_USER}@${LAN_SERVER_IP}:${LAN_DEST_FOLDER}
+    
+    if [ $? -eq 0 ]; then
+        echo "[$(date)] 💾 Copia en red local (LAN) completada con éxito."
+    else
+        echo "[$(date)] ⚠️ ADVERTENCIA: Falló la réplica en la LAN. Revisar conexión o llaves SSH."
+    fi
+else
+    echo "[$(date)] 🖧 Réplica local (LAN) desactivada en el .env. Saltando."
+fi
+
+# 5. Limpieza y Retención Local (Mantiene el script limpio)
 /usr/bin/find $BACKUP_DIR -type f -name "emerald_prod_*.dump" -mtime +$BACKUP_RETENTION_DAYS -delete
 
-# 6. Limpieza y Retención en la Nube (Rclone borra lo viejo en Drive)
+# 6. Limpieza y Retención en la Nube
 echo "[$(date)] 🧹 Aplicando política de retención en la nube (${BACKUP_RETENTION_DAYS} días)..."
 /usr/bin/rclone delete "${DRIVE_REMOTE_NAME}:${DRIVE_FOLDER_ID}" --min-age "${BACKUP_RETENTION_DAYS}d"
 
 echo "[$(date)] 🏁 Proceso de backup finalizado con éxito."
+
