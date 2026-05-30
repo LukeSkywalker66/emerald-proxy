@@ -1,0 +1,28 @@
+services:
+  # El Gran Portero
+  proxy:
+    image: nginx:alpine
+    container_name: emerald_global_proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    networks:
+      - emerald_gateway
+
+  # El Gestor de SSL
+  certbot:
+    image: certbot/certbot
+    container_name: emerald_global_certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+networks:
+  emerald_gateway:
+    external: true
