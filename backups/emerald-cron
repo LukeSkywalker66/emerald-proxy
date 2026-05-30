@@ -1,0 +1,1 @@
+0 3 * * * /opt/emerald-proxy/backups/backup.sh >> /var/log/emerald_backup.log 2>&1
