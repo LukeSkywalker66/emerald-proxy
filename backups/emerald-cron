@@ -1,5 +1,5 @@
-# Backups de base de datos todos los dias a las 03:00 AM
-0 3 * * * /opt/emerald-proxy/backups/backup.sh >> /var/log/emerald_backup.log 2>&1
+# Limpieza segura de recursos Docker no utilizados; no elimina volumenes.
+0 4 * * 0 /usr/bin/docker system prune -af > /dev/null 2>&1
 
-# Limpieza profunda de Docker todos los domingos a las 04:00 AM
-0 4 * * 0 /usr/bin/docker system prune -af --volumes > /dev/null 2>&10 3 * * * /opt/emerald-proxy/backups/backup.sh >> /var/log/emerald_backup.log 2>&1
+# Renueva los certificados SSL dos veces al mes y recarga Nginx si la renovacion termina correctamente.
+30 3 1,15 * * /usr/bin/docker run --rm -v /opt/emerald-proxy/certbot/conf:/etc/letsencrypt -v /opt/emerald-proxy/certbot/www:/var/www/certbot certbot/certbot renew --webroot -w /var/www/certbot --quiet && /usr/bin/docker exec emerald_global_proxy nginx -s reload >> /var/log/emerald_ssl_renewal.log 2>&1
