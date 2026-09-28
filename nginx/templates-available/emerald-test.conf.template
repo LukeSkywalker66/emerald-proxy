@@ -1,7 +1,7 @@
 # 1. EL REDIRECTOR GLOBAL (Manda todo a HTTPS)
 server {
     listen 80;
-    server_name ${TEST-DOMAIN};
+    server_name ${TEST_DOMAIN};
     client_max_body_size 20m;
 
     location /.well-known/acme-challenge/ {
@@ -15,15 +15,15 @@ server {
 # 2. EL SERVIDOR SEGURO (Agnóstico al entorno)
 server {
     listen 443 ssl;
-    server_name ${TEST-DOMAIN};
+    server_name ${TEST_DOMAIN};
     client_max_body_size 20m;
 
-    ssl_certificate /etc/letsencrypt/live/${TEST-DOMAIN}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/${TEST-DOMAIN}/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/${TEST_DOMAIN}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${TEST_DOMAIN}/privkey.pem;
     ssl_protocols TLSv1.2 TLSv1.3;
 
     location / {
-        proxy_pass http://${TEST-UPSTREAM_CONTAINER};
+        proxy_pass http://${TEST_UPSTREAM_CONTAINER};
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

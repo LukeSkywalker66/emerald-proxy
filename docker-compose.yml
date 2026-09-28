@@ -7,14 +7,14 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    environment:
-      - DOMAIN=${DOMAIN}
-      - UPSTREAM_CONTAINER=${UPSTREAM_CONTAINER}
+    env_file:
+      - .env  # Inyecta dinámicamente PROD_DOMAIN, STAGING_DOMAIN, DEV_DOMAIN, etc.
     volumes:
-      - ./nginx/templates:/etc/nginx/templates:ro
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-      - ./nginx/templates-enabled:/etc/nginx/templates
+      # Agregamos la carpeta de origen como solo lectura para que los symlinks resuelvan
+      - ./nginx/templates-available:/etc/nginx/templates-available:ro
+      - ./nginx/templates-enabled:/etc/nginx/templates # Solo lee lo que activamos vía symlink
     networks:
       - emerald_gateway
 
