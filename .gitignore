@@ -1,1 +1,15 @@
 certbot/
+
+# ========================================
+# Emerald Proxy - Entorno y Seguridad
+# ========================================
+.env
+
+# ========================================
+# Certbot (Certificados y Desafíos Let's Encrypt)
+# ========================================
+certbot/conf/
+certbot/www/
+# Ignorar templates activados localmente
+nginx/templates-enabled/*
+!nginx/templates-enabled/.gitkeep

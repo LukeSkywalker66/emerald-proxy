@@ -7,10 +7,14 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    env_file:
+      - .env  # Inyecta dinámicamente PROD_DOMAIN, STAGING_DOMAIN, DEV_DOMAIN, etc.
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
+      # Agregamos la carpeta de origen como solo lectura para que los symlinks resuelvan
+      - ./nginx/templates-available:/etc/nginx/templates-available:ro
+      - ./nginx/templates-enabled:/etc/nginx/templates # Solo lee lo que activamos vía symlink
     networks:
       - emerald_gateway
 
