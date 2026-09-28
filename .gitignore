@@ -10,3 +10,6 @@ certbot/
 # ========================================
 certbot/conf/
 certbot/www/
+# Ignorar templates activados localmente
+nginx/templates-enabled/*
+!nginx/templates-enabled/.gitkeep
