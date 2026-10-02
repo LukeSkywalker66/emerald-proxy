@@ -18,12 +18,17 @@ server {
     server_name ${DEV_DOMAIN};
     client_max_body_size 20m;
 
+    # Resolvedor DNS de Docker: resuelve el upstream en tiempo de petición para
+    # que un contenedor caído no tumbe nginx al arrancar (solo dará 502 a ese vhost).
+    resolver 127.0.0.11 valid=10s ipv6=off;
+
     ssl_certificate /etc/letsencrypt/live/${DEV_DOMAIN}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/${DEV_DOMAIN}/privkey.pem;
     ssl_protocols TLSv1.2 TLSv1.3;
 
     location / {
-        proxy_pass http://${DEV_UPSTREAM_CONTAINER};
+        set $upstream ${DEV_UPSTREAM_CONTAINER};
+        proxy_pass http://$upstream;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
