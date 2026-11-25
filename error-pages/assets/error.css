@@ -1,0 +1,211 @@
+:root {
+  --bg: #0b0e10;
+  --surface: #111619;
+  --neon: #00ff9d;
+  --neon-soft: #10b981;
+  --teal: #2dd4bf;
+  --text: #e8f0ec;
+  --muted: #87948e;
+  --mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1100px 620px at 50% -12%, rgba(0, 255, 157, 0.14), transparent 62%),
+    radial-gradient(800px 520px at 110% 110%, rgba(45, 212, 191, 0.10), transparent 55%),
+    var(--bg);
+  display: flex;
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+}
+
+/* Escaneado retro-neón sutil */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1120px;
+  margin: auto;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: var(--neon);
+  text-shadow: 0 0 12px rgba(0, 255, 157, 0.6);
+  margin-bottom: 1.5rem;
+}
+
+.brand::before {
+  content: "";
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 0.15rem;
+  background: linear-gradient(135deg, #00ff9d, #2dd4bf);
+  box-shadow: 0 0 12px rgba(0, 255, 157, 0.9);
+}
+
+figure {
+  width: min(100%, 1040px);
+  margin: 0 auto 1.4rem;
+}
+
+figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 1rem;
+  background: #0a0d0e;
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 157, 0.35),
+    0 0 34px rgba(0, 255, 157, 0.20),
+    0 30px 60px rgba(0, 0, 0, 0.65);
+}
+
+.svg-art {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.4rem;
+}
+
+.svg-art svg {
+  width: min(360px, 70vw);
+  height: auto;
+  filter: drop-shadow(0 0 18px rgba(0, 255, 157, 0.25));
+}
+
+h1 {
+  font-family: var(--mono);
+  font-size: clamp(1.6rem, 4.2vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+  text-shadow: 0 0 20px rgba(0, 255, 157, 0.35), 0 0 46px rgba(0, 255, 157, 0.12);
+}
+
+p {
+  font-size: 1.04rem;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 56ch;
+  margin: 0 auto;
+}
+
+p strong {
+  color: var(--neon);
+  text-shadow: 0 0 8px rgba(0, 255, 157, 0.5);
+}
+
+.badge {
+  display: inline-block;
+  margin-top: 1.15rem;
+  padding: 0.45rem 1rem;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--neon);
+  background: rgba(0, 255, 157, 0.06);
+  border: 1px solid rgba(0, 255, 157, 0.45);
+  box-shadow:
+    0 0 14px rgba(0, 255, 157, 0.25),
+    inset 0 0 10px rgba(0, 255, 157, 0.08);
+  text-shadow: 0 0 6px rgba(0, 255, 157, 0.6);
+}
+
+.actions {
+  margin-top: 1.7rem;
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 0.72rem 1.45rem;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn.primary {
+  background: var(--neon);
+  color: #04140c;
+  box-shadow: 0 0 20px rgba(0, 255, 157, 0.45);
+}
+
+.btn.primary:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 157, 0.7);
+}
+
+.btn.ghost {
+  color: var(--neon);
+  border: 1px solid rgba(0, 255, 157, 0.55);
+  background: transparent;
+  text-shadow: 0 0 8px rgba(0, 255, 157, 0.5);
+}
+
+.btn.ghost:hover {
+  background: rgba(0, 255, 157, 0.08);
+  box-shadow: 0 0 18px rgba(0, 255, 157, 0.25);
+}
+
+footer {
+  margin-top: 2.2rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: #5f6b64;
+  letter-spacing: 0.04em;
+}
+
+footer a {
+  color: inherit;
+}

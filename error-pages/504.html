@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>504 · Tiempo de espera agotado | Emerald ERP</title>
+  <link rel="stylesheet" href="/error-pages/assets/error.css?v=3">
+</head>
+<body>
+  <main>
+    <div class="brand">Emerald ERP</div>
+    <figure>
+      <img id="art" alt="Ilustración de tiempo de espera agotado">
+    </figure>
+    <h1>El servidor tardó demasiado</h1>
+    <p>El servicio interno agotó el tiempo de espera. Probá recargar la página o volvé a intentarlo más tarde.</p>
+    <span class="badge">Error 504 · Gateway Timeout</span>
+    <div class="actions">
+      <a class="btn primary" href="javascript:location.reload()">Recargar página</a>
+      <a class="btn ghost" href="/">Ir al inicio</a>
+    </div>
+    <footer>Emerald ERP · 2F Internet</footer>
+  </main>
+  <script>
+    (function () {
+      var art = document.getElementById('art');
+      var images = ['/error-pages/assets/504.webp'];
+      art.src = images[Math.floor(Math.random() * images.length)];
+    })();
+  </script>
+</body>
+</html>

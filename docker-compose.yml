@@ -15,6 +15,9 @@ services:
       # Agregamos la carpeta de origen como solo lectura para que los symlinks resuelvan
       - ./nginx/templates-available:/etc/nginx/templates-available:ro
       - ./nginx/templates-enabled:/etc/nginx/templates # Solo lee lo que activamos vía symlink
+      # Páginas de error personalizadas y flag de mantenimiento
+      - ./error-pages:/var/www/error-pages:ro
+      - ./maintenance:/var/www/maintenance
     networks:
       - emerald_gateway
 
@@ -22,6 +25,7 @@ services:
   certbot:
     image: certbot/certbot
     container_name: emerald_global_certbot
+    restart: always
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>502 · Servicio sin respuesta | Emerald ERP</title>
+  <link rel="stylesheet" href="/error-pages/assets/error.css?v=3">
+</head>
+<body>
+  <main>
+    <div class="brand">Emerald ERP</div>
+    <figure>
+      <img id="art" alt="Ilustración de servicio sin respuesta">
+    </figure>
+    <h1>El servicio no respondió</h1>
+    <p>No pudimos obtener una respuesta válida del servidor interno. Probá recargar en unos segundos.</p>
+    <span class="badge">Error 502 · Bad Gateway</span>
+    <div class="actions">
+      <a class="btn primary" href="javascript:location.reload()">Recargar página</a>
+      <a class="btn ghost" href="/">Ir al inicio</a>
+    </div>
+    <footer>Emerald ERP · 2F Internet</footer>
+  </main>
+  <script>
+    (function () {
+      var art = document.getElementById('art');
+      var images = ['/error-pages/assets/502.webp', '/error-pages/assets/502-2.webp'];
+      art.src = images[Math.floor(Math.random() * images.length)];
+    })();
+  </script>
+</body>
+</html>
