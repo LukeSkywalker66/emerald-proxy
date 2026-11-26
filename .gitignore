@@ -15,5 +15,5 @@ nginx/templates-enabled/*
 !nginx/templates-enabled/.gitkeep
 # Capturas y backups locales
 *.png
-*.bak
+*.bak*
 maintenance/on
