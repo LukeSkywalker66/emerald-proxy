@@ -13,3 +13,7 @@ certbot/www/
 # Ignorar templates activados localmente
 nginx/templates-enabled/*
 !nginx/templates-enabled/.gitkeep
+# Capturas y backups locales
+*.png
+*.bak
+maintenance/on
